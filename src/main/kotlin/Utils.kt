@@ -1,7 +1,7 @@
 package org.carlosalcina
 
 import org.carlosalcina.model.Direccion
-import java.time.LocalDateTime
+import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 
 class Utils {
@@ -36,16 +36,16 @@ class Utils {
             return input
         }
 
-        fun pedirFecha(enunciado: String): LocalDateTime {
-            val dateTimeFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy")
-            var fecha: LocalDateTime? = null
+        fun pedirFecha(enunciado: String): LocalDate {
+            val dateTimeFormat = DateTimeFormatter.ofPattern("dd/MM/yyyy")
+            var fecha: LocalDate? = null
             while (fecha == null) {
                 println(enunciado)
                 val input = readln()
                 try {
-                    fecha = LocalDateTime.parse(input, dateTimeFormat)
+                    fecha = LocalDate.parse(input, dateTimeFormat)
                 } catch (e: Exception) {
-                    println("Formato inválido, introduce la fecha en formato dd-MM-yyyy")
+                    println("Formato inválido, introduce la fecha en formato dd/MM/yyyy")
                 }
             }
             return fecha
@@ -100,7 +100,7 @@ class Utils {
             return listaEtiquetas
         }
 
-        fun formatearFecha(fecha: LocalDateTime): String {
+        fun formatearFecha(fecha: LocalDate): String {
             val formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy")
             return fecha.format(formatter)
         }

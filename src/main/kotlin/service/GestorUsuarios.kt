@@ -36,20 +36,28 @@ class GestorUsuarios(
 
     }
 
-    fun iniciarSesionFake(): Boolean {
+    fun iniciarSesionFake(): Usuario? {
         val correo = Utils.pedirString("Introduce tu correo (no hace falta contraseña): ")
-        return usuarioRepository.getById(correo) != null
+        return usuarioRepository.getById(correo)
     }
 
 
     private fun pedirCorreo(): String {
-        var pedirActvo = true
+        val emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$".toRegex() // Expresión regular para validar el formato del correo
+        var pedirActivo = true
         var correo = ""
-        while (pedirActvo) {
+
+        while (pedirActivo) {
             println("Introduce un correo:")
             correo = readln()
+
+            if (!correo.matches(emailRegex)) {
+                println("Correo inválido, introduce un correo válido")
+                continue
+            }
+
             if (usuarioRepository.getById(correo) == null) {
-                pedirActvo = false
+                pedirActivo = false
             } else {
                 println("Correo ya registrado, elige otro")
             }

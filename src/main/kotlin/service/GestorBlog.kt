@@ -24,6 +24,7 @@ class GestorBlog(
                     }
 
                     2 -> gestorNoticias.publicarNoticia(userLogged!!)
+                    3 -> gestorComentarios.escribirComentario(userLogged!!)
                     4 -> gestorNoticias.listarNoticiasPorUsuario()
                     5 -> gestorComentarios.obtenerComentariosDeNoticia()
                     6 -> gestorNoticias.listarNoticiasPorTag()
@@ -35,7 +36,7 @@ class GestorBlog(
                 when (readln().toIntOrNull()) {
                     0 -> menuActivo = false
                     1 -> gestorUsuarios.registrarUsuario()
-                    2 -> gestorUsuarios.iniciarSesionFake()
+                    2 -> userLogged = gestorUsuarios.iniciarSesionFake()
                     3 -> gestorNoticias.listarNoticiasPorUsuario()
                     4 -> gestorComentarios.obtenerComentariosDeNoticia()
                     5 -> gestorNoticias.listarNoticiasPorTag()
@@ -64,7 +65,7 @@ class GestorBlog(
         println("=== Menú de Noticias ===")
         println("0. Salir")
         println("1. Registrar usuario")
-        println("2. Inciar sesión")
+        println("2. Iniciar sesión")
         println("3. Listar noticias publicadas por un usuario")
         println("4. Listar comentarios de una noticia")
         println("5. Buscar noticias por etiquetas")

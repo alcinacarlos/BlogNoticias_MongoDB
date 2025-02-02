@@ -6,7 +6,7 @@ import org.carlosalcina.model.Noticia
 import org.carlosalcina.model.Usuario
 import org.carlosalcina.repository.ComentarioRepository
 import org.carlosalcina.repository.NoticiaRepository
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 class GestorComentarios(
     private val comentarioRepository: ComentarioRepository,
@@ -30,7 +30,7 @@ class GestorComentarios(
 
         val texto = Utils.pedirString("Texto del comentario: ", 2000)
 
-        val fecha = LocalDateTime.now()
+        val fecha = LocalDate.now()
 
         val comentario = Comentario(usuario.nombreUsuario, noticia.titulo, texto, fecha)
 

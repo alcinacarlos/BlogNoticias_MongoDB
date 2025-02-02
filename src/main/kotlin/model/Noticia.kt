@@ -1,13 +1,13 @@
 package org.carlosalcina.model
 
 import org.bson.codecs.pojo.annotations.BsonId
-import java.time.LocalDateTime
+import java.time.LocalDate
 
 data class Noticia(
     @BsonId
     val titulo: String,
     val cuerpo: String,
-    val fechaPublicacion: LocalDateTime,
+    val fechaPublicacion: LocalDate,
     val autor: String,
     val etiquetas: List<String>? = null
 ){
