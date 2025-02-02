@@ -17,6 +17,8 @@ dependencies {
 
     // https://mvnrepository.com/artifact/io.github.cdimascio/dotenv-kotlin
     implementation("io.github.cdimascio:dotenv-kotlin:6.4.2")
+
+    implementation("ch.qos.logback:logback-classic:1.4.6")
 }
 
 tasks.test {

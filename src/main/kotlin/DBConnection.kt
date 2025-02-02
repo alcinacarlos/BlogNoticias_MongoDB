@@ -5,7 +5,7 @@ import com.mongodb.client.MongoClients
 import com.mongodb.client.MongoDatabase
 import io.github.cdimascio.dotenv.dotenv
 
-object ConexionMongo {
+object DBConnection {
     private val mongoClient: MongoClient by lazy {
         val dotenv = dotenv()
         val connectString = dotenv["URL_MONGODB"]

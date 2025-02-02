@@ -5,10 +5,13 @@ import java.time.LocalDateTime
 
 data class Noticia(
     @BsonId
-    val _id: String,
     val titulo: String,
     val cuerpo: String,
     val fechaPublicacion: LocalDateTime,
-    val autor: Usuario,
+    val autor: String,
     val etiquetas: List<String>? = null
-)
+){
+    override fun toString(): String {
+        return "Título: $titulo, Cuerpo: $cuerpo, FechaPub: $fechaPublicacion, Autor: $autor, Etiquetas: $etiquetas"
+    }
+}
