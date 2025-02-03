@@ -24,7 +24,7 @@ class UsuarioRepository {
             coll.insertOne(usuario)
             return true
         } catch (e: Exception) {
-            println("Error al insertar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -37,7 +37,7 @@ class UsuarioRepository {
             val result = coll.replaceOne(filtro, updatedUsuario)
             return result.matchedCount > 0
         } catch (e: Exception) {
-            println("Error al actualizar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -50,7 +50,7 @@ class UsuarioRepository {
             val result = coll.deleteOne(filtro)
             return result.deletedCount > 0
         } catch (e: Exception) {
-            println("Error al eliminar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -61,7 +61,7 @@ class UsuarioRepository {
             val coll = getCollection(database)
             return coll.find(Filters.eq("_id", correo)).first()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return null
         }
     }
@@ -72,7 +72,7 @@ class UsuarioRepository {
             val coll = getCollection(database)
             return coll.find(Filters.eq("nombreUsuario", nombreUsuario)).first()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return null
         }
     }
@@ -83,7 +83,7 @@ class UsuarioRepository {
             val coll = getCollection(database)
             return coll.find().toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }

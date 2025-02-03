@@ -23,7 +23,7 @@ class ComentarioRepository {
             coll.insertOne(comentario)
             return true
         } catch (e: Exception) {
-            println("Error al insertar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -35,7 +35,7 @@ class ComentarioRepository {
             val filtro = Filters.eq("noticiaId", noticiaId)
             return coll.find(filtro).toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }

@@ -1,19 +1,20 @@
 package org.carlosalcina.service
 
-import org.carlosalcina.Utils
+import org.carlosalcina.io.EntradaSalida
 import org.carlosalcina.model.EstadoUsuario
 import org.carlosalcina.model.Usuario
 import org.carlosalcina.repository.UsuarioRepository
 
-class GestorUsuarios(
-    private val usuarioRepository: UsuarioRepository
+class UsuariosService(
+    private val usuarioRepository: UsuarioRepository,
+    private val entradaSalida: EntradaSalida
 ) {
     fun registrarUsuario() {
-        println("Registrando usuario")
+        entradaSalida.mostrar("Registrando usuario")
 
         val correo = pedirCorreo()
 
-        val nombreCompleto = Utils.pedirString("Nombre Completo: ", 30)
+        val nombreCompleto = entradaSalida.pedirString("Nombre Completo: ", 30)
 
         val nombreUsuario = pedirUsername()
 
@@ -22,23 +23,29 @@ class GestorUsuarios(
             activo = true
         )
 
-        val direccion = Utils.pedirDireccion()
+        val direccion = entradaSalida.pedirDireccion()
 
-        val telefonosContacto = Utils.pedirTelefonoContacto()
+        val telefonosContacto = entradaSalida.pedirTelefonoContacto()
 
         val usuario = Usuario(correo, nombreCompleto, nombreUsuario, estadoUsuario, direccion, telefonosContacto)
 
         if (usuarioRepository.insert(usuario)) {
-            println("Usuario registrado correctamente")
+            entradaSalida.mostrar("Usuario registrado correctamente", usuario)
         } else {
-            println("Error al registrar usuario")
+            entradaSalida.mostrar("Error al registrar usuario", usuario)
         }
 
     }
 
-    fun iniciarSesionFake(): Usuario? {
-        val correo = Utils.pedirString("Introduce tu correo (no hace falta contraseña): ")
-        return usuarioRepository.getById(correo)
+    fun iniciarSesionFake():Usuario? {
+        val correo = entradaSalida.pedirString("Introduce tu correo (no hace falta contraseña): ")
+        val usuario = usuarioRepository.getById(correo)
+        if (usuario == null){
+            entradaSalida.mostrar("Correo no registrado", correo)
+        }else{
+            entradaSalida.mostrar("Sesion iniciado correctamente", usuario)
+        }
+        return usuario
     }
 
 
@@ -48,18 +55,17 @@ class GestorUsuarios(
         var correo = ""
 
         while (pedirActivo) {
-            println("Introduce un correo:")
-            correo = readln()
+            correo = entradaSalida.pedirString("Introduce un correo: ")
 
             if (!correo.matches(emailRegex)) {
-                println("Correo inválido, introduce un correo válido")
+                entradaSalida.mostrar("Correo inválido, introduce un correo válido", correo)
                 continue
             }
 
             if (usuarioRepository.getById(correo) == null) {
                 pedirActivo = false
             } else {
-                println("Correo ya registrado, elige otro")
+                entradaSalida.mostrar("Correo ya registrado, elige otro", correo)
             }
         }
         return correo
@@ -69,12 +75,11 @@ class GestorUsuarios(
         var pedirActvo = true
         var username = ""
         while (pedirActvo) {
-            println("Introduce un nombre de usuario:")
-            username = readln()
+            username = entradaSalida.pedirString("Introduce un nombre de usuario: ")
             if (usuarioRepository.getByUsername(username) == null) {
                 pedirActvo = false
             } else {
-                println("Nombre de usuario ya registrado, elige otro")
+                entradaSalida.mostrar("Nombre de usuario ya registrado, elige otro", username)
             }
         }
         return username

@@ -25,7 +25,7 @@ class NoticiaRepository {
             coll.insertOne(noticia)
             return true
         } catch (e: Exception) {
-            println("Error al insertar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -38,7 +38,7 @@ class NoticiaRepository {
             val result = coll.replaceOne(filtro, updatedNoticia)
             return result.matchedCount > 0
         } catch (e: Exception) {
-            println("Error al actualizar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -51,7 +51,7 @@ class NoticiaRepository {
             val result = coll.deleteOne(filtro)
             return result.deletedCount > 0
         } catch (e: Exception) {
-            println("Error al eliminar: ${e.message}")
+            e.printStackTrace()
             return false
         }
     }
@@ -62,7 +62,7 @@ class NoticiaRepository {
             val coll = getCollection(database)
             return coll.find(Filters.eq("_id", id)).first()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return null
         }
     }
@@ -72,7 +72,7 @@ class NoticiaRepository {
             val coll = getCollection(database)
             return coll.find(Filters.eq("autor", autor)).toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }
@@ -82,7 +82,7 @@ class NoticiaRepository {
             val coll = getCollection(database)
             return coll.find(Filters.`in`("etiquetas", etiqueta)).toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }
@@ -97,7 +97,7 @@ class NoticiaRepository {
                 .limit(10)
                 .toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }
@@ -108,7 +108,7 @@ class NoticiaRepository {
             val coll = getCollection(database)
             return coll.find().toList()
         } catch (e: Exception) {
-            println("Error: ${e.message}")
+            e.printStackTrace()
             return emptyList()
         }
     }
