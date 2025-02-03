@@ -57,7 +57,7 @@ class GestorBlog(
     }
 
     private fun showLoggedMenu() {
-        entradaSalida.mostrar("=== Menú de Noticias ===")
+        entradaSalida.mostrar("\nMenú de Noticias")
         entradaSalida.mostrar("\t0. Salir")
         entradaSalida.mostrar("\t1. Cerrar sesión")
         entradaSalida.mostrar("\t2. Publicar noticia")
@@ -70,7 +70,7 @@ class GestorBlog(
     }
 
     private fun showMenu() {
-        entradaSalida.mostrar("=== Menú de Noticias ===")
+        entradaSalida.mostrar("\nMenú de Noticias")
         entradaSalida.mostrar("\t0. Salir")
         entradaSalida.mostrar("\t1. Registrar usuario")
         entradaSalida.mostrar("\t2. Iniciar sesión")

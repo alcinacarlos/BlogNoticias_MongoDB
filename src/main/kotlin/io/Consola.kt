@@ -11,7 +11,7 @@ class Consola(
     override fun mostrar(mensaje: Any, itemLogged: Any?) {
         println(mensaje)
         if (itemLogged != null) {
-            logger.log(mensaje.toString())
+            logger.log(mensaje.toString() + itemLogged.toString())
         }
     }
     override fun pedirInt(enunciado: String): Int {
